@@ -1,2 +1,6 @@
-package org.tsp.eshopplum.entities.enums;public enum Role {
+package org.tsp.eshopplum.entities.enums;
+
+public enum Role {
+    USER,
+    ADMIN
 }
