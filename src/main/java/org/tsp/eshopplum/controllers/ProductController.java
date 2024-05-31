@@ -13,14 +13,14 @@ import org.tsp.eshopplum.services.ProductService;
 import java.util.List;
 
 @RestController
-@RequestMapping(value = "/api/v1/")
+@RequestMapping(value = "/api/v1/products")
 public class ProductController {
 
     @Autowired
     private ProductService productService;
 
 
-    @GetMapping("/products")
+    @GetMapping
     public ResponseEntity<List<Product>> findAll(){
         List<Product> products = productService.findAll();
         return ResponseEntity.ok().body(products);
