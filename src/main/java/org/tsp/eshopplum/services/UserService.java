@@ -3,7 +3,12 @@ package org.tsp.eshopplum.services;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.tsp.eshopplum.config.MyUserDetails;
 import org.tsp.eshopplum.entities.User;
 import org.tsp.eshopplum.repositories.UserRepository;
 
@@ -11,10 +16,13 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class UserService {
+public class UserService implements UserDetailsService {
 
     @Autowired
     private UserRepository userRepository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     public List<User> findAll() {return userRepository.findAll();}
 
@@ -24,7 +32,13 @@ public class UserService {
     }
 
     public User save(User user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         return userRepository.save(user);
+    }
+
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        Optional<User> user = userRepository.findByName(username);
+        return user.map(MyUserDetails::new).orElseThrow(() -> new UsernameNotFoundException("Username: " + username + " not found"));
     }
 
     public void delete(Long id) {

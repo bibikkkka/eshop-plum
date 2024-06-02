@@ -12,7 +12,7 @@ import org.tsp.eshopplum.services.CategoryService;
 import java.util.List;
 
 @RestController
-@RequestMapping("/categories")
+@RequestMapping("/api/v1/categories")
 public class CategoryController {
     @Autowired
     private CategoryService categoryService;
@@ -24,7 +24,7 @@ public class CategoryController {
         return ResponseEntity.ok().body(categories);
     }
 
-    @GetMapping(value = "/{id}")
+    @GetMapping(value = "/categories/{id}")
     public ResponseEntity<Category> findById(@PathVariable Long id){
         Category category = categoryService.findById(id);
         return ResponseEntity.ok().body(category);

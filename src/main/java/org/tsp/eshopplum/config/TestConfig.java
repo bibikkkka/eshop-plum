@@ -44,15 +44,15 @@ public class TestConfig implements CommandLineRunner {
         Order order2 = new Order(null, Instant.parse("2023-07-19T03:42:10Z"), OrderStatus.SHIPPED, user2);
         Order order3 = new Order(null, Instant.parse("2023-10-20T21:21:22Z"), OrderStatus.WAITING_PAYMENT, user3);
 
-        Category categoryFood = new Category(null, "Food");
-        Category categoryToys = new Category(null, "Toys");
-        Category categoryClothes = new Category(null, "Clothes");
+        Category categoryFood = new Category(null, "Еда");
+        Category categoryToys = new Category(null, "Игрушки");
+        Category categoryClothes = new Category(null, "Одежда");
 
-        Product product1 = new Product(null, "Felix", "Dry cat food", 28.5, "");
-        Product product2 = new Product(null, "Pedigree", "Dry dog food - 10 kg", 1190.0, "");
-        Product product3 = new Product(null, "Bone toy", "Bone toy for active dogs", 1250.0, "");
-        Product product4 = new Product(null, "Dog Jacket", "Funny dog coat with big mouse ears for warm winter ", 2200.0, "");
-        Product product5 = new Product(null, "Cat Jacket", "Winter warm jacket for your cat", 1000.99, "");
+        Product product1 = new Product(null, "Феликс", "Жидкий корм", 28.5, "");
+        Product product2 = new Product(null, "Педигри", "Сухой корм - 10 кг", 1190.0, "");
+        Product product3 = new Product(null, "Косточка", "Игрушка кость для активных питомцев", 1250.0, "");
+        Product product4 = new Product(null, "Куртка для собаки", "Зимняя куртка для вашего пёсика ", 2200.0, "");
+        Product product5 = new Product(null, "Кошачья куртка", "Коту на зиму, а то скучает дома", 1000.99, "");
 
         userRepository.saveAll(Arrays.asList(user2, user3));
         orderRepository.saveAll(Arrays.asList(order1, order2, order3));
