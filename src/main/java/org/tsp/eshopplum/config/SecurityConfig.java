@@ -33,9 +33,16 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http.csrf(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests(auth -> auth.requestMatchers("api/v1/test/welcome", "api/v1/test/new").permitAll()
-                        .requestMatchers("api/v1/test/**").authenticated())
-                .formLogin(AbstractAuthenticationFilterConfigurer::permitAll)
+                .authorizeHttpRequests(auth -> auth.requestMatchers(
+                                "/api/v1/categories/*",
+                                "api/v1/test/**",
+                                "api/v1/products/**")
+                                .permitAll()
+                        .requestMatchers(
+                                "api/v1/orders/**",
+                                "**/logout")
+                                .authenticated())
+                .formLogin(AbstractAuthenticationFilterConfigurer::permitAll) //логин для всех
                 .build();
     }
 

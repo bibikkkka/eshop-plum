@@ -2,6 +2,7 @@ package org.tsp.eshopplum.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import org.tsp.eshopplum.entities.User;
@@ -17,32 +18,36 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @GetMapping
+    @GetMapping("/all")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<List<User>> findAll() {
         List<User> users = userService.findAll();
         return ResponseEntity.ok().body(users);
     }
 
     @GetMapping(value = "/{id}")
+    @PreAuthorize("isAuthenticated()")
     public ResponseEntity<User> findById(@PathVariable Long id) {
         User user = userService.findById(id);
         return ResponseEntity.ok().body(user);
     }
 
-    @PostMapping(value = "/")
-    public ResponseEntity<User> insert(@RequestBody User user){
+    @PostMapping(value = "/new")
+    public ResponseEntity<User> addNewUser(@RequestBody User user){
         user = userService.save(user);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(user.getId()).toUri();
         return ResponseEntity.created(uri).body(user);
     }
 
     @DeleteMapping(value = "/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<Void> delete(@PathVariable Long id){
         userService.delete(id);
         return ResponseEntity.noContent().build();
     }
 
     @PutMapping(value = "/{id}")
+    @PreAuthorize("isAuthenticated()")
     public ResponseEntity<User> update(@PathVariable Long id, @RequestBody User user){
         user = userService.update(id, user);
         return ResponseEntity.ok().body(user);

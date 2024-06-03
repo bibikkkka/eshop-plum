@@ -4,16 +4,15 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.tsp.eshopplum.entities.User;
-import org.tsp.eshopplum.entities.enums.Role;
 import org.tsp.eshopplum.services.UserService;
 
 @RestController
 @RequestMapping("api/v1/test")
-public class SignUpController {
+public class TestController {
 
     private final UserService userService;
 
-    public SignUpController(UserService userService) {
+    public TestController(UserService userService) {
         this.userService = userService;
     }
 
@@ -23,11 +22,11 @@ public class SignUpController {
         return "Welcome to the Shop Plum!";
     }
 
-    @PostMapping("/new")
+    /*@PostMapping("/new")
     public String addNewUser(@RequestBody User user) {
         userService.save(user);
         return "User is saved";
-    }
+    }*/
 
     @GetMapping("/home")
     @PreAuthorize("hasAuthority('USER')") // описываем правила для захода на эту точку
