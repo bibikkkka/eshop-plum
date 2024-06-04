@@ -21,7 +21,6 @@ public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @Column(unique=true)
     private String name;
     private String email;
     private String phone;
@@ -29,24 +28,21 @@ public class User implements Serializable {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    /*@JsonIgnore
+    @JsonIgnore
     @OneToMany(mappedBy = "client")
-    private List<Order> orders = new ArrayList<>();*/
-
-    @OneToOne(mappedBy = "user", cascade = CascadeType.REMOVE)
-    private Bucket bucket;
+    private List<Order> orders = new ArrayList<>();
 
     public User() {
     }
 
-    public User(Long id, String name, String email, String phone, String password, Role role, Bucket bucket) {
+    public User(Long id, String name, String email, String phone, String password, Role role) {
+        super();
         this.id = id;
         this.name = name;
         this.email = email;
         this.phone = phone;
         this.password = password;
         this.role = role;
-        this.bucket = bucket;
     }
 
     public Long getId() {
@@ -89,20 +85,16 @@ public class User implements Serializable {
         this.password = password;
     }
 
+    public List<Order> getOrders() {
+        return orders;
+    }
+
     public Role getRole() {
         return role;
     }
 
     public void setRole(Role role) {
         this.role = role;
-    }
-
-    public Bucket getBucket() {
-        return bucket;
-    }
-
-    public void setBucket(Bucket bucket) {
-        this.bucket = bucket;
     }
 
     @Override

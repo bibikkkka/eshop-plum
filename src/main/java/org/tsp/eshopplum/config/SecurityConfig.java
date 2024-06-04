@@ -34,8 +34,8 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http.csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth.requestMatchers(
-                                "/api/v1/categories/*",
-                                "api/v1/test/**",
+                                "/api/v1/categories/**",
+                                "api/v1/users/**",
                                 "api/v1/products/**")
                                 .permitAll()
                         .requestMatchers(
