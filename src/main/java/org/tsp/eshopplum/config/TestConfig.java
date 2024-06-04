@@ -1,3 +1,4 @@
+/*
 package org.tsp.eshopplum.config;
 
 import java.time.Instant;
@@ -75,8 +76,10 @@ public class TestConfig implements CommandLineRunner {
 
         orderItemRepository.saveAll(Arrays.asList(orderItem1, orderItem2, orderItem3, orderItem4));
 
-        /*Payment payment1 = new Payment(null, Instant.parse("2023-06-20T21:53:07Z"), order1);
+        */
+/*Payment payment1 = new Payment(null, Instant.parse("2023-06-20T21:53:07Z"), order1);
         order1.setPayment(payment1);
-        orderRepository.save(order1);*/
+        orderRepository.save(order1);*//*
+
     }
-}
+}*/
