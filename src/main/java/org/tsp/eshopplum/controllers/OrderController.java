@@ -12,7 +12,7 @@ import org.tsp.eshopplum.services.OrderService;
 import java.util.List;
 
 @RestController
-@RequestMapping("api/v1/orders")
+@RequestMapping("/api/v1/orders")
 public class OrderController {
     @Autowired
     private OrderService service;
