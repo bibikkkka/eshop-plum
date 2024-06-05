@@ -5,6 +5,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import org.tsp.eshopplum.entities.Order;
 import org.tsp.eshopplum.entities.User;
 import org.tsp.eshopplum.services.UserService;
 
@@ -32,12 +33,7 @@ public class UserController {
         return ResponseEntity.ok().body(user);
     }
 
-    @PostMapping(value = "/new")
-    public ResponseEntity<User> addNewUser(@RequestBody User user){
-        user = userService.save(user);
-        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(user.getId()).toUri();
-        return ResponseEntity.created(uri).body(user);
-    }
+
 
     @DeleteMapping(value = "/{id}")
     @PreAuthorize("hasAuthority('ADMIN')")
@@ -52,4 +48,6 @@ public class UserController {
         user = userService.update(id, user);
         return ResponseEntity.ok().body(user);
     }
+
+
 }
