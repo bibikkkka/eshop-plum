@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.tsp.eshopplum.entities.*;
 import org.tsp.eshopplum.entities.enums.Role;
 import org.tsp.eshopplum.repositories.*;
@@ -31,10 +32,13 @@ public class TestConfig implements CommandLineRunner {
     @Autowired
     private OrderItemRepository orderItemRepository;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     @Override
     public void run(String... args) throws Exception {
 
-        User user1 = new User(null, "admin", "", "", "admin", Role.ADMIN);
+        User user1 = new User(null, "admin", "admin", "", passwordEncoder.encode("admin"), Role.ADMIN);
         User user2 = new User(null, "Дмитрий Брикоткин", "dmitriybri@gmail.com", "85999999991", "pass", Role.USER);
         User user3 = new User(null, "Капкаева Галина", "zvezdochka@mail.ru", "85999559991", "pass", Role.USER);
 
@@ -52,7 +56,7 @@ public class TestConfig implements CommandLineRunner {
         Product product4 = new Product(null, "Куртка для собаки", "Зимняя куртка для вашего пёсика ", 2200.0, "");
         Product product5 = new Product(null, "Кошачья куртка", "Коту на зиму, а то скучает дома", 1000.99, "");
 
-        userRepository.saveAll(Arrays.asList(user2, user3));
+        userRepository.saveAll(Arrays.asList(user1, user2, user3));
         orderRepository.saveAll(Arrays.asList(order1, order2, order3));
         categoryRepository.saveAll(Arrays.asList(categoryFood, categoryToys, categoryClothes));
         productRepository.saveAll(Arrays.asList(product1, product2, product4, product3, product5));

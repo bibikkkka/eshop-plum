@@ -39,13 +39,13 @@ public class SignController {
         return ResponseEntity.created(uri).body(user);
     }
 
-    /*@PostMapping("/login")
+    @PostMapping("/login")
     public ResponseEntity<?> loginUser(@RequestBody LoginReq loginReq){
-
+        System.out.println("\n##########\n" + loginReq.toString() + "\n##########\n");
         LoginResponse loginResponse = userService.loginUser(loginReq);
         return ResponseEntity.ok().body(loginResponse);
     }
-*/
+
 
     /*@PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) {

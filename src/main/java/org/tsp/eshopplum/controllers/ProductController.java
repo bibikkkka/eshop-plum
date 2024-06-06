@@ -3,6 +3,7 @@ package org.tsp.eshopplum.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.tsp.eshopplum.entities.Product;
 import org.tsp.eshopplum.services.ProductService;
