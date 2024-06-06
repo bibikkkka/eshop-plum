@@ -8,10 +8,12 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.tsp.eshopplum.config.MyUserDetails;
-import org.tsp.eshopplum.entities.User;
+import org.tsp.eshopplum.entities.*;
 import org.tsp.eshopplum.repositories.UserRepository;
 
+import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
 
@@ -71,4 +73,30 @@ public class UserService implements UserDetailsService {
         user.setEmail(data.getEmail());
         user.setPhone(data.getPhone());
     }
+
+    /*public LoginResponse loginUser(LoginReq loginReq){
+        Optional<User> user = userRepository.findByName(loginReq.getUsername());
+
+        if (user.isPresent()) {
+            if (passwordEncoder.matches(loginReq.getPassword(), user.get().getPassword())) {
+                return new LoginResponse("Login Success", true);
+            }else {
+                return new LoginResponse("Login Failed: incorrect password", false);
+            }
+        } else {
+            return new LoginResponse("User "+ loginReq.getUsername() + " doesn't exists", false);
+        }
+
+        if (user != null) {
+            if (passwordEncoder.matches(loginReq.getPassword(), user.get().getPassword())) {
+                return new LoginResponse("Login Success", true);
+            }else {
+                return new LoginResponse("Login Failed: incorrect password", false);
+            }
+        } else {
+            return new LoginResponse("User "+ loginReq.getUsername() + " doesn't exists", false);
+        }
+    }*/
+
+
 }

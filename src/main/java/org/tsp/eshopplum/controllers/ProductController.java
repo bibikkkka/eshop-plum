@@ -31,7 +31,6 @@ public class ProductController {
 
     @GetMapping(value = "/category/{categoryName}")
     public ResponseEntity<List<Product>> findByCategory(@PathVariable String categoryName){
-        //System.out.println("\n########################\n" + categoryName + "\n########################\n");
         List<Product> products = productService.findProductsByCategory(categoryName);
         return ResponseEntity.ok().body(products);
 

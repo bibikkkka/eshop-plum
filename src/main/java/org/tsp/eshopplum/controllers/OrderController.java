@@ -2,12 +2,10 @@ package org.tsp.eshopplum.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.tsp.eshopplum.entities.Order;
 import org.tsp.eshopplum.entities.User;
+import org.tsp.eshopplum.response.Basket;
 import org.tsp.eshopplum.services.OrderService;
 import org.tsp.eshopplum.services.UserService;
 
@@ -41,5 +39,15 @@ public class OrderController {
         List<Order> orders = user.getOrders();
         return orders.isEmpty() ? ResponseEntity.noContent().build() : ResponseEntity.ok().body(orders);
 
+    }
+
+    @PostMapping("/doorder")
+    public ResponseEntity<Order> doOrder(@RequestBody Basket basket) {
+        System.out.println("\n########\n" + "Зашёл в doorder" + "\n########\n" );
+        System.out.println(basket.toString());
+        Order order = orderService.doOrder(basket);
+        System.out.println("\n########\n" + "Вышел из doorder" + "\n########\n" );
+
+        return ResponseEntity.ok().body(order);
     }
 }

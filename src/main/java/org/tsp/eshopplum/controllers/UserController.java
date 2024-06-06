@@ -4,12 +4,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-import org.tsp.eshopplum.entities.Order;
 import org.tsp.eshopplum.entities.User;
 import org.tsp.eshopplum.services.UserService;
 
-import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -48,6 +45,4 @@ public class UserController {
         user = userService.update(id, user);
         return ResponseEntity.ok().body(user);
     }
-
-
 }

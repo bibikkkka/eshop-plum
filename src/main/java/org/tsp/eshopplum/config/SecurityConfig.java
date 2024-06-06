@@ -35,6 +35,7 @@ public class SecurityConfig {
         return http.csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth.requestMatchers(
                                 "api/v1/reg",
+                                "/api/v1/orders/*",
                                 "api/v1/login/**",
                                 "/api/v1/categories/**",
                                 "api/v1/users/**",
@@ -55,6 +56,8 @@ public class SecurityConfig {
         provider.setPasswordEncoder(passwordEncoder());
         return provider;
     }
+
+
 
     @Bean
     public PasswordEncoder passwordEncoder() {

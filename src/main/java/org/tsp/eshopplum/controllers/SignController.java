@@ -9,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
+import org.tsp.eshopplum.entities.LoginReq;
+import org.tsp.eshopplum.entities.LoginResponse;
 import org.tsp.eshopplum.entities.User;
 import org.tsp.eshopplum.entities.enums.Role;
 import org.tsp.eshopplum.services.UserService;
@@ -37,7 +39,15 @@ public class SignController {
         return ResponseEntity.created(uri).body(user);
     }
 
-    @PostMapping("/login")
+    /*@PostMapping("/login")
+    public ResponseEntity<?> loginUser(@RequestBody LoginReq loginReq){
+
+        LoginResponse loginResponse = userService.loginUser(loginReq);
+        return ResponseEntity.ok().body(loginResponse);
+    }
+*/
+
+    /*@PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody LoginRequest loginRequest) {
 
         System.out.println("\n###########" + loginRequest.getUsername() + " " + loginRequest.getPassword() + "\n###########\n");
@@ -86,7 +96,7 @@ public class SignController {
         }
 
         // геттеры и сеттеры
-    }
+    }*/
 
 
 }

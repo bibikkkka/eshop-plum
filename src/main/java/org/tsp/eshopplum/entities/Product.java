@@ -50,6 +50,8 @@ public class Product implements Serializable {
         this.imgUrl = imgUrl;
     }
 
+
+
     public Long getId() {
         return id;
     }
