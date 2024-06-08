@@ -3,7 +3,6 @@ package org.tsp.eshopplum.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.tsp.eshopplum.entities.Product;
 import org.tsp.eshopplum.services.ProductService;
@@ -21,19 +20,21 @@ public class ProductController {
     @GetMapping
     public ResponseEntity<List<Product>> findAll(){
         List<Product> products = productService.findAll();
+
         return ResponseEntity.ok().body(products);
     }
 
     @GetMapping(value = "/{id}")
     public ResponseEntity<Product> findById(@PathVariable Long id){
         Product product = productService.findById(id);
+
         return ResponseEntity.ok().body(product);
     }
 
     @GetMapping(value = "/category/{categoryName}")
     public ResponseEntity<List<Product>> findByCategory(@PathVariable String categoryName){
         List<Product> products = productService.findProductsByCategory(categoryName);
-        return ResponseEntity.ok().body(products);
 
+        return ResponseEntity.ok().body(products);
     }
 }

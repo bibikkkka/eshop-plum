@@ -9,6 +9,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.tsp.eshopplum.entities.*;
+import org.tsp.eshopplum.entities.enums.OrderStatus;
 import org.tsp.eshopplum.entities.enums.Role;
 import org.tsp.eshopplum.repositories.*;
 
@@ -39,8 +40,8 @@ public class TestConfig implements CommandLineRunner {
     public void run(String... args) throws Exception {
 
         User user1 = new User(null, "admin", "admin", "", passwordEncoder.encode("admin"), Role.ADMIN);
-        User user2 = new User(null, "Дмитрий Брикоткин", "dmitriybri@gmail.com", "85999999991", "pass", Role.USER);
-        User user3 = new User(null, "Капкаева Галина", "zvezdochka@mail.ru", "85999559991", "pass", Role.USER);
+        User user2 = new User(null, "user1", "dmitriybri@gmail.com", "85999999991", passwordEncoder.encode("pass"), Role.USER);
+        User user3 = new User(null, "user2", "zvezdochka@mail.ru", "85999559991", passwordEncoder.encode("pass"), Role.USER);
 
         Order order1 = new Order(null, Instant.parse("2024-01-20T19:53:07Z"), OrderStatus.PAID, user2);
         Order order2 = new Order(null, Instant.parse("2023-07-19T03:42:10Z"), OrderStatus.SHIPPED, user2);
@@ -76,12 +77,6 @@ public class TestConfig implements CommandLineRunner {
         OrderItem orderItem4 = new OrderItem(order3, product5, 1, product5.getPrice());
 
         orderItemRepository.saveAll(Arrays.asList(orderItem1, orderItem2, orderItem3, orderItem4));
-
-/*
-Payment payment1 = new Payment(null, Instant.parse("2023-06-20T21:53:07Z"), order1);
-        order1.setPayment(payment1);
-        orderRepository.save(order1);
-*/
 
     }
 }

@@ -40,12 +40,16 @@ public class SecurityConfig {
                                 "/api/v1/categories/**",
                                 "api/v1/users/**",
                                 "api/v1/products/**")
-                                .permitAll()
+                        .permitAll()
                         .requestMatchers(
                                 "api/v1/orders/**",
                                 "**/logout")
-                                .authenticated())
-                .formLogin(AbstractAuthenticationFilterConfigurer::permitAll) //логин для всех
+                        .authenticated()
+                        .requestMatchers(
+                                "/api/v1/users/all"
+                        ))
+                .formLogin(AbstractAuthenticationFilterConfigurer::permitAll)//логин для всех
+
                 .build();
     }
 
@@ -56,8 +60,6 @@ public class SecurityConfig {
         provider.setPasswordEncoder(passwordEncoder());
         return provider;
     }
-
-
 
     @Bean
     public PasswordEncoder passwordEncoder() {

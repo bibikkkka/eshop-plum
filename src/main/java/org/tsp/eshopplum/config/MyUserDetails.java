@@ -32,7 +32,7 @@ public class MyUserDetails implements UserDetails {
     }
 
     @Override
-    public boolean isAccountNonExpired() { // истек ли срок годности пользователя
+    public boolean isAccountNonExpired() {
         return true;
     }
 

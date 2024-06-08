@@ -10,7 +10,7 @@ import org.tsp.eshopplum.services.UserService;
 import java.util.List;
 
 @RestController
-@RequestMapping(value ="/api/v1/users")
+@RequestMapping(value = "/api/v1/users")
 public class UserController {
 
     @Autowired
@@ -30,18 +30,16 @@ public class UserController {
         return ResponseEntity.ok().body(user);
     }
 
-
-
     @DeleteMapping(value = "/{id}")
     @PreAuthorize("hasAuthority('ADMIN')")
-    public ResponseEntity<Void> delete(@PathVariable Long id){
+    public ResponseEntity<Void> delete(@PathVariable Long id) {
         userService.delete(id);
         return ResponseEntity.noContent().build();
     }
 
     @PutMapping(value = "/{id}")
     @PreAuthorize("isAuthenticated()")
-    public ResponseEntity<User> update(@PathVariable Long id, @RequestBody User user){
+    public ResponseEntity<User> update(@PathVariable Long id, @RequestBody User user) {
         user = userService.update(id, user);
         return ResponseEntity.ok().body(user);
     }

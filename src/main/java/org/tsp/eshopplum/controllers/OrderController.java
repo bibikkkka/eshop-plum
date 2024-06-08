@@ -23,30 +23,30 @@ public class OrderController {
     @GetMapping
     public ResponseEntity<List<Order>> findAll(){
         List<Order> orders = orderService.findAll();
+
         return ResponseEntity.ok().body(orders);
     }
 
     @GetMapping(value = "/{id}")
     public ResponseEntity<Order> findById(@PathVariable Long id){
         Order order = orderService.findById(id);
+
         return ResponseEntity.ok().body(order);
     }
 
     @GetMapping(value = "/user/{id}") //по user_id
     public ResponseEntity<List<Order>> ordersByUserId(@PathVariable Long id){
         User user = userService.findById(id);
-
         List<Order> orders = user.getOrders();
+
         return orders.isEmpty() ? ResponseEntity.noContent().build() : ResponseEntity.ok().body(orders);
 
     }
 
     @PostMapping("/doorder")
     public ResponseEntity<Order> doOrder(@RequestBody Basket basket) {
-        System.out.println("\n########\n" + "Зашёл в doorder" + "\n########\n" );
         System.out.println(basket.toString());
         Order order = orderService.doOrder(basket);
-        System.out.println("\n########\n" + "Вышел из doorder" + "\n########\n" );
 
         return ResponseEntity.ok().body(order);
     }

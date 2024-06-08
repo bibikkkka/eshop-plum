@@ -24,11 +24,13 @@ public class UserService implements UserDetailsService {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-    public List<User> findAll() {return userRepository.findAll();}
+    public List<User> findAll() {
+        return userRepository.findAll();
+    }
 
     public User findById(Long id) {
         Optional<User> user = userRepository.findById(id);
-        return user.orElseThrow(() -> new RuntimeException("User with id: " + id + " not found" ));
+        return user.orElseThrow(() -> new RuntimeException("User with id: " + id + " not found"));
     }
 
     public User save(User user) {
@@ -51,7 +53,7 @@ public class UserService implements UserDetailsService {
             }
         } else {
 
-            throw new RuntimeException("User with id: " + id + " not found" );
+            throw new RuntimeException("User with id: " + id + " not found");
         }
     }
 
@@ -60,9 +62,8 @@ public class UserService implements UserDetailsService {
             User user = userRepository.getReferenceById(id);
             updateUser(user, data);
             return userRepository.save(user);
-        }
-        catch(EntityNotFoundException e) {
-            throw new RuntimeException("User with id: " + id + " not found" );
+        } catch (EntityNotFoundException e) {
+            throw new RuntimeException("User with id: " + id + " not found");
         }
     }
 
@@ -72,29 +73,17 @@ public class UserService implements UserDetailsService {
         user.setPhone(data.getPhone());
     }
 
-    public LoginResponse loginUser(LoginReq loginReq){
+    public LoginResponse loginUser(LoginReq loginReq) {
         Optional<User> user = userRepository.findByName(loginReq.getName());
 
         if (user.isPresent()) {
             if (passwordEncoder.matches(loginReq.getPassword(), user.get().getPassword())) {
                 return new LoginResponse("Login Success", true);
-            }else {
+            } else {
                 return new LoginResponse("Login Failed: incorrect password", false);
             }
         } else {
-            return new LoginResponse("User "+ loginReq.getName() + " doesn't exists", false);
+            return new LoginResponse("User " + loginReq.getName() + " doesn't exists", false);
         }
-
-        /*if (user != null) {
-            if (passwordEncoder.matches(loginReq.getPassword(), user.get().getPassword())) {
-                return new LoginResponse("Login Success", true);
-            }else {
-                return new LoginResponse("Login Failed: incorrect password", false);
-            }
-        } else {
-            return new LoginResponse("User "+ loginReq.getUsername() + " doesn't exists", false);
-        }*/
     }
-
-
 }

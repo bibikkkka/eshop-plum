@@ -1,4 +1,4 @@
-package org.tsp.eshopplum.entities;
+package org.tsp.eshopplum.entities.enums;
 
 public enum OrderStatus {
 

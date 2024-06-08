@@ -19,26 +19,16 @@ public class ProductService {
     @Autowired
     private CategoryRepository categoryRepository;
 
-    public List<Product> findAll(){
+    public List<Product> findAll() {
         return productRepository.findAll();
     }
 
-    public Product save(Product product){
+    public Product save(Product product) {
         return productRepository.save(product);
     }
 
-	/*public List<Product> findProductsByCategory(Long categoryId){
-
-		Category category = categoryRepository.findById(categoryId).orElseThrow();
-
-		return repository.findProductsByCategoriesContaining(category);
-	}*/
-
-    public List<Product> findProductsByCategory(String categoryName){
-
+    public List<Product> findProductsByCategory(String categoryName) {
         Category category = categoryRepository.findByName(categoryName);
-
-        //return repository.findProductsByCategoriesContaining(category);
         return productRepository.findProductsByCategoriesEquals(category);
     }
 
