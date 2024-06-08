@@ -1,4 +1,4 @@
-This is a Spring Boot RESTful API for an e-commerce shop, built using Spring Boot, Maven, Hibernate, MySQL, and Spring Security. The API provides functionality for managing users, orders, and products, as well as login and sign up capabilities.
+H1 This is a Spring Boot RESTful API for an e-commerce shop, built using Spring Boot, Maven, Hibernate, MySQL, and Spring Security. The API provides H1 functionality for managing users, orders, and products, as well as login and sign up capabilities.
 
 Functionality
 Users
